@@ -57,6 +57,8 @@ ImageViewer::ImageViewer()
    , scrollArea(new QScrollArea)
    , scaleFactor(1)
 {
+    setAcceptDrops(true);
+
     imageLabel->setBackgroundRole(QPalette::Base);
     imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imageLabel->setScaledContents(true);
@@ -108,7 +110,6 @@ void ImageViewer::setImage(const QImage &newImage)
         imageLabel->adjustSize();
 }
 
-
 bool ImageViewer::saveFile(const QString &fileName)
 {
     QImageWriter writer(fileName);
@@ -123,7 +124,6 @@ bool ImageViewer::saveFile(const QString &fileName)
     statusBar()->showMessage(message);
     return true;
 }
-
 
 static void initializeImageFileDialog(QFileDialog &dialog, QFileDialog::AcceptMode acceptMode)
 {
@@ -165,12 +165,9 @@ void ImageViewer::saveAs()
 
 void ImageViewer::copy()
 {
-#ifndef QT_NO_CLIPBOARD
     QGuiApplication::clipboard()->setImage(image);
-#endif // !QT_NO_CLIPBOARD
 }
 
-#ifndef QT_NO_CLIPBOARD
 static QImage clipboardImage()
 {
     if (const QMimeData *mimeData = QGuiApplication::clipboard()->mimeData()) {
@@ -182,8 +179,6 @@ static QImage clipboardImage()
     }
     return QImage();
 }
-#endif // !QT_NO_CLIPBOARD
-
 void ImageViewer::paste()
 {
 #ifndef QT_NO_CLIPBOARD
@@ -200,15 +195,8 @@ void ImageViewer::paste()
 #endif // !QT_NO_CLIPBOARD
 }
 
-void ImageViewer::zoomIn()
-{
-    scaleImage(1.25);
-}
-
-void ImageViewer::zoomOut()
-{
-    scaleImage(0.8);
-}
+void ImageViewer::zoomIn(){scaleImage(1.25);}
+void ImageViewer::zoomOut(){scaleImage(0.8);}
 
 void ImageViewer::normalSize()
 {
@@ -263,7 +251,7 @@ void ImageViewer::createActions()
     copyAct->setShortcut(QKeySequence::Copy);
     copyAct->setEnabled(false);
 
-    QAction *pasteAct = editMenu->addAction(tr("&Paste"), this, &ImageViewer::paste);
+    pasteAct = editMenu->addAction(tr("&Paste"), this, &ImageViewer::paste);
     pasteAct->setShortcut(QKeySequence::Paste);
 
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
@@ -304,7 +292,7 @@ void ImageViewer::updateActions()
 
 void ImageViewer::scaleImage(double factor)
 {
-    Q_ASSERT(imageLabel->pixmap());
+    Q_ASSERT(imageLabel->pixmap() && "curent image");
     scaleFactor *= factor;
     imageLabel->resize(scaleFactor * imageLabel->pixmap()->size());
 
