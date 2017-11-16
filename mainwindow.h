@@ -53,91 +53,34 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QImage>
+#include "droponmainwindow.h"
+#include "scrollableimage.h"
 
 
-//event related only
-#include <QDragEnterEvent>
-#include <QDragLeaveEvent>
-#include <QDragMoveEvent>
-#include <QDropEvent>
-#include <QMimeData>
 
 class QAction;
-class QLabel;
 class QMenu;
-class QScrollArea;
-class QScrollBar;
 
-class ImageViewer : public QMainWindow
-{
+class ImageViewer : public DropOnMainWindow{
     Q_OBJECT
-
 public:
     ImageViewer();
-    bool loadFile(const QString &);
-
-private slots:
-    void open();
-    void saveAs();
-    void copy();
-    void paste();
-    void zoomIn();
-    void zoomOut();
-    void normalSize();
-    void fitToWindow();
-    void about();
 
 private:
+    QAction *A_open;
+    QAction *A_saveAs;
+    QAction *A_paste;
+private slots:
+    void ActionCB_open();
+    void ActionCB_saveAs();
+    void ActionCB_paste(){}
+private:
     void createActions();
-    void createMenus();
-    void updateActions();
     bool saveFile(const QString &fileName);
-    void setImage(const QImage &newImage);
-    void scaleImage(double factor);
-    void adjustScrollBar(QScrollBar *scrollBar, double factor);
-
-    QImage image;
-    QLabel *imageLabel;
-    QScrollArea *scrollArea;
-    double scaleFactor;
+    bool open(QStringList pathList);
 
 
-    QAction *saveAsAct;
-    QAction *copyAct;
-    QAction *pasteAct;
-    QAction *zoomInAct;
-    QAction *zoomOutAct;
-    QAction *normalSizeAct;
-    QAction *fitToWindowAct;
-
-protected:
-    ///this event is called when the mouse enters the widgets area during a drag/drop operation
-    void dragEnterEvent(QDragEnterEvent *event){event->acceptProposedAction();}
-    ///this event is called when the mouse moves inside the widgets area during a drag/drop operation
-    void dragMoveEvent(QDragMoveEvent *event){event->acceptProposedAction();}
-    ///this event is called when the mouse leaves the widgets area during a drag/drop operation
-    void dragLeaveEvent(QDragLeaveEvent *event){event->accept();}
-    ///this event is called when the drop operation is initiated at the widget
-    void dropEvent(QDropEvent *event){
-        const QMimeData* mimeData = event->mimeData();
-
-        if (mimeData->hasUrls())
-        {
-          QStringList pathList;
-          QList<QUrl> urlList = mimeData->urls();
-
-          for (int i = 0; i < urlList.size() && i < 32;+i)
-          {
-            pathList.append(urlList.at(i).toLocalFile());
-          }
-
-          if(true/*openFiles(pathList)*/)
-            event->acceptProposedAction();
-        }
-    }
-
+    ScrollableImage *image;
 };
 
 #endif //MAINWINDOW_H
