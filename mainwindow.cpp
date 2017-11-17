@@ -53,10 +53,10 @@
 #include "mainwindow.h"
 
 ImageViewer::ImageViewer()
-   : image(new ScrollableImage)
+   : scrollableImage(new ScrollableImage)
 {
 
-    setCentralWidget(image);
+    setCentralWidget(scrollableImage);
 
     createActions();
 
@@ -104,7 +104,7 @@ void ImageViewer::ActionCB_open()
     QFileDialog dialog(this, tr("Open File"));
     initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
 
-    while (dialog.exec() == QDialog::Accepted && !image->loadFile(dialog.selectedFiles().first())) {}
+    while (dialog.exec() == QDialog::Accepted && !scrollableImage->loadFile(dialog.selectedFiles().first())) {}
 }
 void ImageViewer::ActionCB_saveAs()
 {
@@ -134,7 +134,7 @@ void ImageViewer::createActions(){
 
 bool ImageViewer::open(QStringList pathList)
 {
-    image->loadFile(pathList[0]);
+    scrollableImage->loadFile(pathList[0]);
 
     for (auto &path:pathList){
         QMessageBox b;

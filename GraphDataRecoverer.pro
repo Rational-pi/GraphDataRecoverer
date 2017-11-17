@@ -26,12 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    droponmainwindow.cpp \
-    scrollableimage.cpp
+        droponmainwindow.cpp \
+        scrollableimage.cpp \
+        pointpointerlabel.cpp
 
 HEADERS += \
         mainwindow.h \
-    droponmainwindow.h \
-    scrollableimage.h
-
-FORMS +=
+        droponmainwindow.h \
+        scrollableimage.h \
+        pointpointerlabel.h

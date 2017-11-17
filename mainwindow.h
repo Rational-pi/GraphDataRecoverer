@@ -80,7 +80,7 @@ private:
     bool open(QStringList pathList);
 
 
-    ScrollableImage *image;
+    ScrollableImage *scrollableImage;
 };
 
 #endif //MAINWINDOW_H

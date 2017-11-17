@@ -1,13 +1,16 @@
 #include "scrollableimage.h"
+
+#include "pointpointerlabel.h"
 #include <QtWidgets>
 
 ScrollableImage::ScrollableImage():
-    imageLabel(new QLabel),
+    imageLabel(new PointPointerLabel()),
     scaleFactor(1)
 {
     imageLabel->setBackgroundRole(QPalette::Base);
     imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imageLabel->setScaledContents(true);
+
     this->setBackgroundRole(QPalette::Dark);
     this->setWidget(imageLabel);
     this->setVisible(false);
@@ -79,13 +82,24 @@ void ScrollableImage::adjustScrollBar(QScrollBar *scrollBar, double factor)
                             + ((factor - 1) * scrollBar->pageStep()/2)));
 }
 
+#define CTRL Qt::ControlModifier & QApplication::keyboardModifiers()
+#define SHIFT  Qt::ShiftModifier & QApplication::keyboardModifiers()
 void ScrollableImage::wheelEvent(QWheelEvent *event){
-    if (QApplication::keyboardModifiers() && Qt::ControlModifier){
-        if (event->delta()>0){
-            scaleImage(1.1);
+    Qt::KeyboardModifiers modif=QApplication::keyboardModifiers();
+
+    bool up = event->delta()>0;
+    if (CTRL){
+        scaleImage(up?1.1:0.9);
+    }else{
+        int delta = scaleFactor*(up?-5:5);
+        if (SHIFT){
+            this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value()-delta);
         }else{
-            scaleImage(0.9);
+            this->verticalScrollBar()->setValue(this->verticalScrollBar()->value()+delta);
         }
     }
+
+
+
     event->accept();
 }

@@ -3,6 +3,8 @@
 
 #include <QScrollArea>
 
+#include "pointpointerlabel.h"
+
 class QImage;
 class QLabel;
 class QScrollBar;
@@ -17,7 +19,7 @@ public slots:
     void loadFromClipboard();
 private:
     QImage image;
-    QLabel *imageLabel;
+    PointPointerLabel *imageLabel;
     double scaleFactor;
 
     void setImage(const QImage &newImage);
