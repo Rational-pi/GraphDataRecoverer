@@ -28,10 +28,12 @@ SOURCES += \
         mainwindow.cpp \
         droponmainwindow.cpp \
         scrollableimage.cpp \
-        pointpointerlabel.cpp
+        pointpointerlabel.cpp \
+    gdrscrollarea.cpp
 
 HEADERS += \
         mainwindow.h \
         droponmainwindow.h \
         scrollableimage.h \
-        pointpointerlabel.h
+        pointpointerlabel.h \
+    gdrscrollarea.h

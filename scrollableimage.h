@@ -4,12 +4,13 @@
 #include <QScrollArea>
 
 #include "pointpointerlabel.h"
+#include "gdrscrollarea.h"
 
 class QImage;
 class QLabel;
 class QScrollBar;
 
-class ScrollableImage : public QScrollArea
+class ScrollableImage : public GDRscrollArea
 {
 public:
     ScrollableImage();
@@ -20,15 +21,9 @@ public slots:
 private:
     QImage image;
     PointPointerLabel *imageLabel;
-    double scaleFactor;
+    //double scaleFactor;
 
     void setImage(const QImage &newImage);
-    void adjustScrollBar(QScrollBar *scrollBar, double factor);
-
-
-    //TODO implement whell interactions
-    void wheelEvent(QWheelEvent *event);
-
 };
 
 #endif // SCROLLABLEIMAGE_H

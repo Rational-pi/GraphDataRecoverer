@@ -3,9 +3,12 @@
 #include "pointpointerlabel.h"
 #include <QtWidgets>
 
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
 ScrollableImage::ScrollableImage():
-    imageLabel(new PointPointerLabel()),
-    scaleFactor(1)
+    imageLabel(new PointPointerLabel())
 {
     imageLabel->setBackgroundRole(QPalette::Base);
     imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -15,7 +18,6 @@ ScrollableImage::ScrollableImage():
     this->setWidget(imageLabel);
     this->setVisible(false);
 }
-
 
 bool ScrollableImage::loadFile(const QString &fileName)
 {
@@ -33,7 +35,6 @@ bool ScrollableImage::loadFile(const QString &fileName)
     //statusBar()->showMessage(tr("Opened \"%1\", %2x%3, Depth: %4").arg(QDir::toNativeSeparators(fileName)).arg(image.width()).arg(image.height()).arg(image.depth()));
     return true;
 }
-
 
 static QImage clipboardImage(){
     if (const QMimeData *mimeData = QGuiApplication::clipboard()->mimeData()) {
@@ -62,44 +63,11 @@ void ScrollableImage::setImage(const QImage &newImage)
 {
     image = newImage;
     imageLabel->setPixmap(QPixmap::fromImage(image));
-    scaleFactor = 1.0;
+    //scaleFactor = 1.0;
     this->setVisible(true);
-    imageLabel->resize(scaleFactor * imageLabel->pixmap()->size());
+    imageLabel->resize(/*scaleFactor * */ imageLabel->pixmap()->size());
 }
 
-void ScrollableImage::scaleImage(double factor)
-{
-    Q_ASSERT(imageLabel->pixmap() && "curent image");
-    scaleFactor *= factor;
-    imageLabel->resize(scaleFactor * imageLabel->pixmap()->size());
-    adjustScrollBar(this->horizontalScrollBar(), factor);
-    adjustScrollBar(this->verticalScrollBar(), factor);
-}
-
-void ScrollableImage::adjustScrollBar(QScrollBar *scrollBar, double factor)
-{
-    scrollBar->setValue(int(factor * scrollBar->value()
-                            + ((factor - 1) * scrollBar->pageStep()/2)));
-}
-
-#define CTRL Qt::ControlModifier & QApplication::keyboardModifiers()
-#define SHIFT  Qt::ShiftModifier & QApplication::keyboardModifiers()
-void ScrollableImage::wheelEvent(QWheelEvent *event){
-    Qt::KeyboardModifiers modif=QApplication::keyboardModifiers();
-
-    bool up = event->delta()>0;
-    if (CTRL){
-        scaleImage(up?1.1:0.9);
-    }else{
-        int delta = scaleFactor*(up?-5:5);
-        if (SHIFT){
-            this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value()-delta);
-        }else{
-            this->verticalScrollBar()->setValue(this->verticalScrollBar()->value()+delta);
-        }
-    }
-
-
-
-    event->accept();
-}
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
