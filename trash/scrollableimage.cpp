@@ -1,21 +1,20 @@
 #include "scrollableimage.h"
 
-#include "pointpointerlabel.h"
 #include <QtWidgets>
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
-ScrollableImage::ScrollableImage():
-    imageLabel(new PointPointerLabel())
+ScrollableImage::ScrollableImage()//:
+    //imageLabel(new QLabel())
 {
-    imageLabel->setBackgroundRole(QPalette::Base);
-    imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    imageLabel->setScaledContents(true);
+    //imageLabel->setBackgroundRole(QPalette::Base);
+    //imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    //imageLabel->setScaledContents(true);
 
     this->setBackgroundRole(QPalette::Dark);
-    this->setWidget(imageLabel);
+    //this->setWidget(imageLabel);
     this->setVisible(false);
 }
 
@@ -62,10 +61,10 @@ void ScrollableImage::loadFromClipboard(){
 void ScrollableImage::setImage(const QImage &newImage)
 {
     image = newImage;
-    imageLabel->setPixmap(QPixmap::fromImage(image));
+    //imageLabel->setPixmap(QPixmap::fromImage(image));
     //scaleFactor = 1.0;
     this->setVisible(true);
-    imageLabel->resize(/*scaleFactor * */ imageLabel->pixmap()->size());
+    //imageLabel->resize(/*scaleFactor * */ imageLabel->pixmap()->size());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////

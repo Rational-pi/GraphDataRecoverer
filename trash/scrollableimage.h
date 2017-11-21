@@ -2,8 +2,6 @@
 #define SCROLLABLEIMAGE_H
 
 #include <QScrollArea>
-
-#include "pointpointerlabel.h"
 #include "gdrscrollarea.h"
 
 class QImage;
@@ -20,8 +18,6 @@ public slots:
     void loadFromClipboard();
 private:
     QImage image;
-    PointPointerLabel *imageLabel;
-    //double scaleFactor;
 
     void setImage(const QImage &newImage);
 };

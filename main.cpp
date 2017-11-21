@@ -1,10 +1,10 @@
-#include "mainwindow.h"
+#include "GDRmainWindow/gdrmainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ImageViewer w;
+    GDRmainWindow w;
     w.show();
 
     return a.exec();

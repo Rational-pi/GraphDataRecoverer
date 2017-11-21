@@ -125,7 +125,6 @@ void ImageViewer::createActions(){
     QAction *exitAct = fileMenu->addAction(tr("E&xit"), this, &QWidget::close);
     exitAct->setShortcut(tr("Ctrl+Q"));
 
-
     QMenu *editMenu = menuBar()->addMenu(tr("&Edit"));
     A_paste = editMenu->addAction(tr("&Paste"), this, &ImageViewer::ActionCB_paste);
     A_paste->setShortcut(QKeySequence::Paste);
