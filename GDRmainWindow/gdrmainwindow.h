@@ -1,22 +1,18 @@
 #ifndef GDRMAINWINDOW_H
 #define GDRMAINWINDOW_H
 
-#include <QMainWindow>
-
+#include "gdrdroponmainwindow.h"
 #include "ui_gdrmainwindow.h"
 
-class GDRmainWindow : public QMainWindow
+class GDRmainWindow : public GDRdropOnMainWindow
 {
     Q_OBJECT
 public:
     explicit GDRmainWindow(QWidget *parent = 0);
-
-signals:
-
-public slots:
-
 private:
     Ui::MainWindow ui;
+protected:
+    virtual bool open(QStringList pathList);
 };
 
 #endif // GDRMAINWINDOW_H

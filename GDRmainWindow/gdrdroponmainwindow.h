@@ -1,22 +1,21 @@
-#ifndef DROPONMAINWINDOW_H
-#define DROPONMAINWINDOW_H
+#ifndef GDRDROPONMAINWINDOW_H
+#define GDRDROPONMAINWINDOW_H
 
 #include <QMainWindow>
-class QStringList;
 
-class DropOnMainWindow : public QMainWindow
+class GDRdropOnMainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit DropOnMainWindow(QWidget *parent = nullptr);
+    explicit GDRdropOnMainWindow(QWidget *parent = nullptr);
 
 signals:
 
 public slots:
 
 protected:
+    ///...
     virtual bool open(QStringList pathList)=0;
-
     ///this event is called when the mouse enters the widgets area during a drag/drop operation
     void dragEnterEvent(QDragEnterEvent *event);
     ///this event is called when the mouse moves inside the widgets area during a drag/drop operation
@@ -27,4 +26,4 @@ protected:
     void dropEvent(QDropEvent *event);
 };
 
-#endif // DROPONMAINWINDOW_H
+#endif // GDRDROPONMAINWINDOW_H
