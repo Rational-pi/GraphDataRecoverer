@@ -19,12 +19,12 @@
   <property name="windowTitle">
    <string>Graph Data Recoverer</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="p_centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="GDRtabGraphicsView" name="p_tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>-1</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -38,35 +38,6 @@
       <property name="tabBarAutoHide">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="GDRgraphicsView" name="p_graphicsView">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="cursor" stdset="0">
-           <cursorShape>ArrowCursor</cursorShape>
-          </property>
-          <property name="verticalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOn</enum>
-          </property>
-          <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOn</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -85,9 +56,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GDRgraphicsView</class>
-   <extends>QGraphicsView</extends>
-   <header>gdrgraphicsview.h</header>
+   <class>GDRtabGraphicsView</class>
+   <extends>QTabWidget</extends>
+   <header>gdrtabgraphicsview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
