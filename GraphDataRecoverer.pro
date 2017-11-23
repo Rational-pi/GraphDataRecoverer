@@ -17,5 +17,4 @@ SOURCES += \
 HEADERS +=
 FORMS +=
 
-include(trash\trash.pri)
 include(GDRmainWindow\gdrmainwindow.pri)

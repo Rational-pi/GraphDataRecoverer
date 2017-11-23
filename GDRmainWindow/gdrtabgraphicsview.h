@@ -14,11 +14,6 @@ public:
 public slots:
     void tabCloseRequestedHandler(int id);
 
-
-
-
-
-
 };
 
 #endif // GDRTABGRAPHICSVIEW_H

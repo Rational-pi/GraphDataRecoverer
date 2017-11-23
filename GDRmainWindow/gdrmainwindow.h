@@ -12,6 +12,7 @@ public:
 private:
     Ui::MainWindow ui;
 protected:
+    bool openSingle(QString filepath);
     virtual bool open(QStringList pathList);
 };
 

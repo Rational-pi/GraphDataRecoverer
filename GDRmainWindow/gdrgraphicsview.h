@@ -7,8 +7,7 @@ class GDRgraphicsView : public QGraphicsView
 public:
     GDRgraphicsView(QWidget *parent = Q_NULLPTR):QGraphicsView(parent){}
 protected:
-
-virtual void wheelEvent(QWheelEvent *event);
+    virtual void wheelEvent(QWheelEvent *event);
 };
 
 #endif // GDRGRAPHICSVIEW_H
