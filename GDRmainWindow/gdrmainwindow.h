@@ -12,7 +12,7 @@ public:
 private:
     Ui::MainWindow ui;
 protected:
-    bool openSingle(QString filepath);
+    bool openSingleImage(QString filepath);
     virtual bool open(QStringList pathList);
 };
 

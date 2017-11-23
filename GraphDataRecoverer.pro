@@ -17,4 +17,5 @@ SOURCES += \
 HEADERS +=
 FORMS +=
 
-include(GDRmainWindow\gdrmainwindow.pri)
+include(GDRmainWindow\GDRmainwindow.pri)
+include(GDRscenes\GDRscenes.pri)

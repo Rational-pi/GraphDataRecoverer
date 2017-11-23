@@ -11,7 +11,7 @@ GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
     ui.setupUi(this);
 }
 
-bool GDRmainWindow::openSingle(QString filepath){
+bool GDRmainWindow::openSingleImage(QString filepath){
     QString filename=QUrl(filepath).fileName();
     QImageReader reader(filepath);
     reader.setAutoTransform(true);
@@ -32,6 +32,6 @@ bool GDRmainWindow::openSingle(QString filepath){
 
 bool GDRmainWindow::open(QStringList pathList){
     bool status=true;
-    for (auto &filepath:pathList)status*=openSingle(filepath);
+    for (auto &filepath:pathList)status*=openSingleImage(filepath);
     return status;
 }
