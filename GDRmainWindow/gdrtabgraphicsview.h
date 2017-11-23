@@ -6,19 +6,18 @@
 
 class GDRtabGraphicsView : public QTabWidget
 {
+    Q_OBJECT
 public:
-    explicit GDRtabGraphicsView(QWidget *parent = Q_NULLPTR):QTabWidget(parent){
-        setDocumentMode(true);
-        setTabsClosable(true);
-        setMovable(true);
-        setTabBarAutoHide(false);
-    }
+    explicit GDRtabGraphicsView(QWidget *parent = Q_NULLPTR);
 
-    GDRgraphicsView *addGraphicsView(QString name){
-        GDRgraphicsView *v=new GDRgraphicsView(this);
-        addTab(v,name);
-        return v;
-    }
+    GDRgraphicsView *addGraphicsView(QString name);
+public slots:
+    void tabCloseRequestedHandler(int id);
+
+
+
+
+
 
 };
 
