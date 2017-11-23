@@ -6,6 +6,7 @@ class GDRgraphicsView : public QGraphicsView
 {
 public:
     GDRgraphicsView(QWidget *parent = Q_NULLPTR):QGraphicsView(parent){}
+    QString name;
 protected:
     virtual void wheelEvent(QWheelEvent *event);
 };

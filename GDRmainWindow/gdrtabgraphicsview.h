@@ -13,7 +13,9 @@ public:
     GDRgraphicsView *addGraphicsView(QString name);
 public slots:
     void tabCloseRequestedHandler(int id);
-
+    void tabChangedHandler(int id);
+signals:
+    void viewChanged(GDRgraphicsView *graphicsViewInFocus);
 };
 
 #endif // GDRTABGRAPHICSVIEW_H

@@ -11,6 +11,8 @@ public:
     explicit GDRmainWindow(QWidget *parent = 0);
 private:
     Ui::MainWindow ui;
+private slots:
+    void viewChangedHandler(GDRgraphicsView *graphicsViewInFocus);
 protected:
     bool openSingleImage(QString filepath);
     virtual bool open(QStringList pathList);

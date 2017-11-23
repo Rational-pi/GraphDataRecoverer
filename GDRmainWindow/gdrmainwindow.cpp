@@ -9,6 +9,12 @@
 GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
 {
     ui.setupUi(this);
+    connect(ui.p_tabWidget,SIGNAL(viewChanged(GDRgraphicsView*)),this,SLOT(viewChangedHandler(GDRgraphicsView*)));
+}
+
+void GDRmainWindow::viewChangedHandler(GDRgraphicsView *graphicsViewInFocus){
+    if (graphicsViewInFocus)
+        statusBar()->showMessage(tr("Focused \"%1\"").arg(graphicsViewInFocus->name));
 }
 
 bool GDRmainWindow::openSingleImage(QString filepath){
@@ -26,6 +32,7 @@ bool GDRmainWindow::openSingleImage(QString filepath){
     GDRgraphicsView *view=ui.p_tabWidget->addGraphicsView(filename);
     view->setScene(new QGraphicsScene(this));
     view->scene()->addPixmap(QPixmap::fromImage(image));
+    view->name=filename;
     statusBar()->showMessage(tr("Opened \"%1\", %2x%3, Depth: %4").arg(QDir::toNativeSeparators(filepath)).arg(image.width()).arg(image.height()).arg(image.depth()));
     return true;
 }
