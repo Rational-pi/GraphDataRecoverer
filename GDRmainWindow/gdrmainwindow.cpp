@@ -39,6 +39,6 @@ bool GDRmainWindow::openSingleImage(QString filepath){
 
 bool GDRmainWindow::open(QStringList pathList){
     bool status=true;
-    for (auto &filepath:pathList)status*=openSingleImage(filepath);
+    for (auto &filepath:pathList)status&=openSingleImage(filepath);
     return status;
 }
