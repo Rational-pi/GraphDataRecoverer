@@ -1,6 +1,7 @@
 #include "gdrscenebase.h"
 
-GDRsceneBase::GDRsceneBase()
+
+GDRsceneBase::GDRsceneBase(QObject *parent):QGraphicsScene(parent)
 {
 
 }

@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QUrl>
 #include "gdrtabgraphicsview.h"
+#include "GDRscenes/gdrgraphscene.h"
 
 GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
 {
@@ -13,9 +14,17 @@ GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
 }
 
 void GDRmainWindow::viewChangedHandler(GDRgraphicsView *graphicsViewInFocus){
-    if (graphicsViewInFocus)
-        statusBar()->showMessage(tr("Focused \"%1\"").arg(graphicsViewInFocus->name));
+    if (graphicsViewInFocus){
+        GDRsceneBase *scene=dynamic_cast<GDRsceneBase*>(graphicsViewInFocus->scene());
+        if (scene){
+            statusBar()->showMessage(tr("Focused \"%1\"").arg(scene->getName()));
+        }
+    }
+
+
 }
+
+
 
 bool GDRmainWindow::openSingleImage(QString filepath){
     QString filename=QUrl(filepath).fileName();
@@ -30,9 +39,7 @@ bool GDRmainWindow::openSingleImage(QString filepath){
         return false;
     }
     GDRgraphicsView *view=ui.p_tabWidget->addGraphicsView(filename);
-    view->setScene(new QGraphicsScene(this));
-    view->scene()->addPixmap(QPixmap::fromImage(image));
-    view->name=filename;
+    view->setScene(new GDRGraphScene(image,filename,this));
     statusBar()->showMessage(tr("Opened \"%1\", %2x%3, Depth: %4").arg(QDir::toNativeSeparators(filepath)).arg(image.width()).arg(image.height()).arg(image.depth()));
     return true;
 }
