@@ -20,3 +20,6 @@ FORMS +=
 
 include(GDRmainWindow\GDRmainwindow.pri)
 include(GDRscenes\GDRscenes.pri)
+
+RESOURCES += \
+    global.qrc

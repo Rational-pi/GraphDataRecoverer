@@ -2,6 +2,7 @@
 #define GDRSCENEBASE_H
 #include <QGraphicsScene>
 
+
 class GDRsceneBase : public QGraphicsScene
 {
 public:
