@@ -6,6 +6,7 @@
 #include <QUrl>
 #include "gdrtabgraphicsview.h"
 #include "GDRscenes/gdrgraphscene.h"
+#include "macros.h"
 
 GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
 {
@@ -16,12 +17,8 @@ GDRmainWindow::GDRmainWindow(QWidget *parent) : GDRdropOnMainWindow(parent)
 void GDRmainWindow::viewChangedHandler(GDRgraphicsView *graphicsViewInFocus){
     if (graphicsViewInFocus){
         GDRsceneBase *scene=dynamic_cast<GDRsceneBase*>(graphicsViewInFocus->scene());
-        if (scene){
-            statusBar()->showMessage(tr("Focused \"%1\"").arg(scene->getName()));
-        }
+        if (scene) statusBar()->showMessage(tr("Focused \"%1\"").arg(scene->getName()));
     }
-
-
 }
 
 
@@ -31,11 +28,8 @@ bool GDRmainWindow::openSingleImage(QString filepath){
     QImageReader reader(filepath);
     reader.setAutoTransform(true);
     const QImage image = reader.read();
-    if (image.isNull()) {
-        QMessageBox::information(this,
-                                 QGuiApplication::applicationDisplayName(),
-                                 tr("Cannot load %1: %2").arg(QDir::toNativeSeparators(filepath),reader.errorString())
-                                 );
+    if (image.isNull()){
+        MSG_CANT_LOAD(filepath,reader.errorString());
         return false;
     }
     GDRgraphicsView *view=ui.p_tabWidget->addGraphicsView(filename);

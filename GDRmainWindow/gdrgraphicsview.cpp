@@ -5,6 +5,7 @@
 void GDRgraphicsView::wheelEvent(QWheelEvent *event){
     bool up = event->delta()>0;
     if (CTRL){
+        setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
         qreal scaleFactor=up?1.1:0.9;
         scale(scaleFactor,scaleFactor);
     }else QGraphicsView::wheelEvent(event);

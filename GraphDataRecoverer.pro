@@ -14,7 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp
-HEADERS +=
+HEADERS += \
+    macros.h
 FORMS +=
 
 include(GDRmainWindow\GDRmainwindow.pri)
