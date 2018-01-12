@@ -1,6 +1,7 @@
 #ifndef GDRGRAPHICSVIEW_H
 #define GDRGRAPHICSVIEW_H
 #include <QGraphicsView>
+#include "GDRutils/remaper2d.h"
 
 class GDRgraphicsView : public QGraphicsView
 {
@@ -15,6 +16,8 @@ private:
     qreal m_scale;
     QBrush bkgBrush;
     QPen borderPen;
+    Remaper2D xRemaper;
+    Remaper2D yRemaper;
 };
 
 #endif // GDRGRAPHICSVIEW_H

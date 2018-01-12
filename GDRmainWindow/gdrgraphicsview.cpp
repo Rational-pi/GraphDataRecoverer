@@ -1,6 +1,7 @@
 #include "gdrgraphicsview.h"
 #include <QtWidgets>
 #include <QRect>
+#include <iostream>
 
 #define CTRL Qt::ControlModifier & QApplication::keyboardModifiers()
 GDRgraphicsView::GDRgraphicsView(QWidget *parent):QGraphicsView(parent),m_scale(1){
@@ -36,6 +37,9 @@ void GDRgraphicsView::drawBackground(QPainter *painter, const QRectF &rect){
 
 void GDRgraphicsView::mousePressEvent(QMouseEvent *event){
     QPointF pt = mapToScene(event->pos());
-    float rad=0.1;
-    scene()->addLine(pt.x()-0.25,pt.y(),pt.x()+0.25,pt.y());
+    if (CTRL){
+        xRemaper.feed(pt.x(),QInputDialog::getDouble(this,"Ask ?","X value Clicked:",0,-2147483647,2147483647,10));
+        yRemaper.feed(pt.y(),QInputDialog::getDouble(this,"Ask ?","Y value Clicked:",0,-2147483647,2147483647,10));
+    }
+    std::cout <<"("<< xRemaper.remap(pt.x()) << ", "<< yRemaper.remap(pt.y())<< ")," << std::endl;
 }
